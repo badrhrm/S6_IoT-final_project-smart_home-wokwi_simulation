@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ThingSpeak Charts</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container mt-5">
+        <h2>ThingSpeak Charts</h2>
+        <!-- Première ligne de graphiques -->
+        <div class="row mb-4">
+            <div class="col-md-6">
+                <iframe width="450" height="260" style="border: 1px solid #cccccc;" src="https://thingspeak.com/channels/2535771/charts/1?bgcolor=%23ffffff&color=%23d62020&dynamic=true&results=60&type=line&update=15"></iframe>
+            </div>
+            <div class="col-md-6">
+                <iframe width="450" height="260" style="border: 1px solid #cccccc;" src="https://thingspeak.com/channels/2535771/charts/2?bgcolor=%23ffffff&color=%23d62020&dynamic=true&results=60&type=line&update=15"></iframe>
+            </div>
+        </div>
+        <!-- Deuxième ligne de graphiques -->
+        <div class="row mb-4">
+            <div class="col-md-6">
+                <iframe width="450" height="260" style="border: 1px solid #cccccc;" src="https://thingspeak.com/channels/2535771/charts/3?bgcolor=%23ffffff&color=%23d62020&dynamic=true&results=60&type=line&update=15"></iframe>
+            </div>
+            <div class="col-md-6">
+                <iframe width="450" height="260" style="border: 1px solid #cccccc;" src="https://thingspeak.com/channels/2535771/charts/4?bgcolor=%23ffffff&color=%23d62020&dynamic=true&results=60&type=line&update=15"></iframe>
+            </div>
+        </div>
+
+        <!-- Boutons de téléchargement -->
+        <div class="row">
+            <div class="col-md-6">
+                <button class="btn btn-primary mt-2" onclick="downloadData('1', 'csv')">Download CSV </button>
+                <button class="btn btn-primary mt-2" onclick="downloadData('1', 'sql')">Download SQL </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS and custom script -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <script>
+        function downloadData(fieldNumber, format) {
+            // Détermine l'URL de téléchargement en fonction des paramètres
+            let downloadUrl = `download.php?field=${fieldNumber}&format=${format}`;
+
+            // Crée un lien temporaire et déclenche le téléchargement
+            let link = document.createElement('a');
+            link.href = downloadUrl;
+            link.download = `field_${fieldNumber}.${format}`;
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+        }
+    </script>
+</body>
+</html>
